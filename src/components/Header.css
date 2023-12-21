@@ -1,0 +1,32 @@
+/* Header.css */
+.header-container {
+    background-color: #346fae;
+    color: rgb(255, 255, 255);
+    padding: 1rem;
+    text-align: left;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  nav ul {
+    list-style-type: none; /* Remova os marcadores de lista */
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  
+  .nav-link:hover {
+    /* text-decoration: underline; */
+    background-color: #85a8cd;
+  }
+  

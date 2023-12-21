@@ -1,0 +1,33 @@
+/* EditProduct.css */
+.edit-product-container {
+    margin: 20px;
+  }
+  
+  .edit-product-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin-top: 20px;
+  }
+  
+  .edit-product-form label {
+    margin-bottom: 8px;
+  }
+  
+  .edit-product-form input {
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .edit-product-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-product-form button:hover {
+    background-color: #0056b3;
+  }
+  
