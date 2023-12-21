@@ -1,6 +1,7 @@
 {
   "name": "nunes-sports-crud",
   "version": "0.1.0",
+  "homepage": "https://alexandreferr4.github.io/Nunes-Sports-CRUD/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
