@@ -8,7 +8,7 @@
   }
   
   nav ul {
-    list-style-type: none; /* Remova os marcadores de lista */
+    list-style-type: none; 
     padding: 0;
     margin: 0;
   }

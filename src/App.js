@@ -1,4 +1,4 @@
-// App.js
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './pages/ProductList/ProductList';
@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/" element={<ProductList />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
-        {/* Adicione outras rotas conforme necessário */}
+        {}
       </Routes>
     </Router>
   );

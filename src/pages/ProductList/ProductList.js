@@ -12,14 +12,11 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      // Crie uma consulta base
       const productsQuery = collection(db, 'produtos');
   
-      // Execute a consulta e obtenha os dados
       const querySnapshot = await getDocs(productsQuery);
       const allProductsData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   
-      // Filtra localmente os produtos que correspondem à parte digitada
       const filteredProducts = allProductsData.filter(product => {
         const lowercaseSearchTerm = searchTerm.toLowerCase();
         const lowercaseProductName = product.nome.toLowerCase();
@@ -53,7 +50,6 @@ const ProductList = () => {
   return (
     <div className="product-list-container">
       <h2>Lista de Produtos</h2>
-      {/* Adicione um campo de pesquisa */}
       <input
         type="text"
         placeholder="Pesquisar produto por nome"
