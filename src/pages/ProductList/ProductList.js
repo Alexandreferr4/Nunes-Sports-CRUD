@@ -9,22 +9,27 @@ const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchProducts = async () => {
       // Crie uma consulta base
-      let productsQuery = collection(db, 'produtos');
-
-      // Adicione a condição de pesquisa se houver um termo de pesquisa
-      if (searchTerm) {
-        productsQuery = query(productsQuery, where('nome', '==', searchTerm));
-      }
-
+      const productsQuery = collection(db, 'produtos');
+  
       // Execute a consulta e obtenha os dados
       const querySnapshot = await getDocs(productsQuery);
-      const productsData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setProducts(productsData);
+      const allProductsData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  
+      // Filtra localmente os produtos que correspondem à parte digitada
+      const filteredProducts = allProductsData.filter(product => {
+        const lowercaseSearchTerm = searchTerm.toLowerCase();
+        const lowercaseProductName = product.nome.toLowerCase();
+  
+        return lowercaseProductName.includes(lowercaseSearchTerm);
+      });
+  
+      setProducts(filteredProducts);
     };
-
+  
     fetchProducts();
   }, [searchTerm]);
 
