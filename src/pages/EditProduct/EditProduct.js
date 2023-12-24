@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -30,15 +29,35 @@ const EditProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData((prevData) => ({ ...prevData, [name]: value }));
+
+    if (name === 'preco') {
+      let numericValue = value.replace(/[^\d,]/g, '');
+
+      const decimalParts = numericValue.split(',');
+      if (decimalParts.length > 1) {
+        numericValue = `${decimalParts[0]},${decimalParts[1].slice(0, 2)}`;
+      }
+
+      setProductData((prevData) => ({ ...prevData, [name]: `R$ ${numericValue}` }));
+    } else {
+      setProductData((prevData) => ({ ...prevData, [name]: value }));
+    }
+  };
+
+  const formatPreco = (value) => {
+    const numericValue = value.replace(/[^\d,]/g, '');
+    return `R$ ${numericValue.includes(',') ? numericValue : `${numericValue},00`}`;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const formattedPreco = formatPreco(productData.preco);
+
       const docRef = doc(db, 'produtos', id);
-      await updateDoc(docRef, productData);
+      await updateDoc(docRef, { ...productData, preco: formattedPreco });
+
       navigate('/');
     } catch (error) {
       console.error('Erro ao atualizar produto: ', error);

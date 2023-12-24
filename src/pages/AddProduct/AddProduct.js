@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -17,14 +16,39 @@ const AddProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData((prevData) => ({ ...prevData, [name]: value }));
+
+    if (name === 'preco') {
+      let numericValue = value.replace(/[^\d,]/g, '');
+
+      const decimalParts = numericValue.split(',');
+      if (decimalParts.length > 1) {
+        numericValue = `${decimalParts[0]},${decimalParts[1].slice(0, 2)}`;
+      }
+
+      setProductData((prevData) => ({ ...prevData, [name]: `R$ ${numericValue}` }));
+    } else {
+      setProductData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await addDoc(collection(db, 'produtos'), productData);
+      const numericValue = parseFloat(productData.preco.replace(/[^\d,]/g, '').replace(',', '.'));
+
+      if (isNaN(numericValue)) {
+        console.error('Formato de preço inválido');
+        return;
+      }
+
+      const formattedValue = numericValue.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+      });
+
+      await addDoc(collection(db, 'produtos'), { ...productData, preco: formattedValue });
       navigate('/');
     } catch (error) {
       console.error('Erro ao adicionar produto: ', error);
