@@ -16,7 +16,7 @@ Foi utilizado o [Firebase](https://firebase.google.com/?gad_source=1&gclid=Cj0KC
 
 Para hospedagem do site foi utilizado o [Netlify](https://app.netlify.com/)
 
-Link do site Nunes Sports: [https://nunessportscrud.netlify.app/](https://velvety-khapse-f8fdbb.netlify.app/).
+Link do site Nunes Sports: [https://nunessports.netlify.app/](https://nunessports.netlify.app/).
 
 ## Desenvolvimento:
 
